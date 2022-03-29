@@ -1,0 +1,37 @@
+=============== Mar 28, 2022 (CEST) ===============
+19:55:10.672594 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+19:55:10.824456 db@open opening
+19:55:10.826057 version@stat F·[] S·0B[] Sc·[]
+19:55:10.873898 db@janitor F·2 G·0
+19:55:10.873954 db@open done T·49.462385ms
+19:58:45.097159 db@close closing
+19:58:45.097331 db@close done T·165.537µs
+=============== Mar 28, 2022 (CEST) ===============
+19:59:14.183196 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+19:59:14.183454 version@stat F·[] S·0B[] Sc·[]
+19:59:14.183509 db@open opening
+19:59:14.183638 journal@recovery F·1
+19:59:14.184081 journal@recovery recovering @1
+19:59:14.344589 memdb@flush created L0@2 N·88 S·1KiB "loc..seq,v2":"version,v1"
+19:59:14.346787 version@stat F·[1] S·1KiB[1KiB] Sc·[0.25]
+19:59:14.575549 db@janitor F·3 G·0
+19:59:14.575612 db@open done T·392.085358ms
+20:01:26.748053 db@close closing
+20:01:26.748189 db@close done T·131.389µs
+=============== Mar 29, 2022 (CEST) ===============
+08:33:15.435787 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+08:33:15.435982 version@stat F·[1] S·1KiB[1KiB] Sc·[0.25]
+08:33:15.435993 db@open opening
+08:33:15.436058 journal@recovery F·1
+08:33:15.436438 journal@recovery recovering @3
+08:33:15.493922 memdb@flush created L0@5 N·110 S·1KiB "loc..seq,v90":"n:\xf2..ail,v95"
+08:33:15.494608 version@stat F·[2] S·2KiB[2KiB] Sc·[0.50]
+08:33:15.802190 db@janitor F·4 G·0
+08:33:15.802271 db@open done T·366.251035ms
+08:33:23.623735 table@compaction L0·2 -> L1·0 S·2KiB Q·284
+08:33:23.762226 table@build created L1@8 N·12 S·705B "loc..seq,v90":"version,v1"
+08:33:23.762355 version@stat F·[0 1] S·705B[0B 705B] Sc·[0.00 0.00]
+08:33:23.860734 table@compaction committed F-1 S-1KiB Ke·0 D·186 T·236.903967ms
+08:33:23.860999 table@remove removed @2
+08:33:44.084062 db@close closing
+08:33:44.084266 db@close done T·201.394µs
