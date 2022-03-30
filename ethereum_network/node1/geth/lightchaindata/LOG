@@ -1,8 +1,8 @@
-=============== Mar 28, 2022 (CEST) ===============
-19:51:51.605789 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
-19:51:51.761714 db@open opening
-19:51:51.762499 version@stat F·[] S·0B[] Sc·[]
-19:51:51.811258 db@janitor F·2 G·0
-19:51:51.811330 db@open done T·49.563839ms
-19:51:51.812907 db@close closing
-19:51:51.813008 db@close done T·98.778µs
+=============== Mar 30, 2022 (CEST) ===============
+12:33:27.040908 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+12:33:27.196066 db@open opening
+12:33:27.196914 version@stat F·[] S·0B[] Sc·[]
+12:33:27.245677 db@janitor F·2 G·0
+12:33:27.245745 db@open done T·49.627249ms
+12:33:27.248098 db@close closing
+12:33:27.248197 db@close done T·95.988µs

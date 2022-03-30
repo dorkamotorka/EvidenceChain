@@ -4,12 +4,13 @@
         "homesteadBlock": 0,
         "eip150Block": 0,
         "eip155Block": 0,
-        "eip158Block": 0
+        "eip158Block": 0,
+	"byzantiumBlock": 0,
+	"constantinopleBlock": 0
     },
     "difficulty": "1",
-    "gasLimit": "2100000",
+    "gasLimit": "100000000000",
     "alloc": {
-        "0x79C50CF00898D316918392A8FC339E8c3348d900": { "balance": "1000000000000000000" },
-        "0xefd9f3cf5d787c31083f8862c305d9d5305a2fad": { "balance": "2000000000000000000" }
+	"79c50cf00898d316918392a8fc339e8c3348d900": { "balance": "10000000000000000000000000000000000000" }
     }
 }
