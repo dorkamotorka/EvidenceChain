@@ -5,6 +5,9 @@ name = "pypi"
 
 [packages]
 web3 = {extras = ["tester"], version = "*"}
+ssdeep = "*"
+ipfsapi = "*"
+ipfs-api = "*"
 
 [dev-packages]
 

@@ -1,2 +1,8 @@
 *.swp
 *.bin
+*.log
+*.rlp
+*.ldb
+*/chaindata/*
+*/nodes/*
+*/triecache/*
