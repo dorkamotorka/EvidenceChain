@@ -17,7 +17,7 @@ import ssdeep
 import ipfsApi as ipfsapi
 import requests
 
-IPNS_HASH = 'k51qzi5uqu5dhxi8noq3759heuc3a4vvhs8bgmgvywy77j6ewm88aqbvo54b3f'
+IPNS_HASH = 'k51qzi5uqu5dhxi8noqywy77j6ewm88aqbvo54b3f'
 
 try:
     ipfs = ipfsapi.Client('127.0.0.1', 5001)
@@ -39,11 +39,12 @@ web3.eth.defaultAccount = web3.eth.accounts[1]
 compiled_contract_path = '../build/contracts/HashRecord.json'
 
 # Deployed contract address (see `migrate` command output: `contract address`)
-deployed_contract_address = '0xe4c0329947178456791F04261af11E9f4369F461'
+deployed_contract_address = '0x3a34a5DC0f54aA960a4C9dEF9745bf41DDd6A19f'
 
 with open(compiled_contract_path) as file:
     contract_json = json.load(file)  # load contract info as JSON
     contract_abi = contract_json['abi']  # fetch contract's abi - necessary to call its functions
+    print(contract_abi)
 
 # Fetch deployed contract reference
 contract = web3.eth.contract(address=deployed_contract_address, abi=contract_abi)
@@ -56,7 +57,7 @@ with open('last_hash.txt', 'r') as f:
     last_hash = f.read()
     print('Last hash:', last_hash)
     if last_hash != '':
-        print('Chaining hash before push to Ethereum network...')
+        #print('Chaining hash before push to Ethereum network...')
         fuzzy_hash = ssdeep.hash(fuzzy_hash + last_hash)
         print('Chained fuzzy hash:', fuzzy_hash)
 
@@ -68,6 +69,7 @@ ipfs_hash = ipfs.add('evidence.txt')['Hash']
 
 # No support from python library - therefore we call bash commands
 # Adds IPFS hash to IPNS
+'''
 print('Adding IPFS hash to IPNS. This might take a minute...')
 os.system('ipfs name publish /ipfs/' + ipfs_hash)
 
@@ -77,12 +79,19 @@ data_on_ipns = requests.get('https://gateway.ipfs.io/ipns/' + IPNS_HASH).text
 #print('Data on IPNS:', data_on_ipns)
 # Sanity check
 assert data_on_ipfs == data_on_ipns
+'''
 
+# Interaction with smart contract on Ethereum network
 # Store hash according to IPNS hash
 tx_hash = contract.functions.setFuzzyHash(fuzzy_hash, IPNS_HASH).transact()
-tx_receipt = web3.eth.wait_for_transaction_receipt(tx_hash)
-ret = contract.functions.getFuzzyHash(IPNS_HASH).call()
+tx_receipt = web3.eth.waitForTransactionReceipt(tx_hash)
+
+# Retreive stored hashes according to IPNS hash
+ret = contract.functions.getFuzzyHashes(IPNS_HASH).call()
 print(ret)
-#assert ret == fuzzy_hash
+
+# Delete all hashes according to IPNS hash
+#tx_hash = contract.functions.deleteHashes(IPNS_HASH).transact()
+#tx_receipt = web3.eth.waitForTransactionReceipt(tx_hash)
 
 print('Succesfully stored and retreived a new fuzzy hash!')

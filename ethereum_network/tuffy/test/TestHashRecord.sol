@@ -7,7 +7,7 @@ import "../contracts/HashRecord.sol";
 
 contract TestHashRecord {
    // Random SHA-256
-   uint256 ipnsHash = 0xe03c6c1e303eba770681162f2e839f261cd6d4812cf95c55cbf4c5d216f768a3;
+   string ipnsHash = 'e03c6c1e303eba770681162f2e839f261cd6d4812cf95c55cbf4c5d216f768a3';
 
    // Random fuzzy hash
    string fuzzyHash1 = '3:AXGBicFlgVNhBGcL6wCrFQEv:AXGHsNhxLsr2C'; 
