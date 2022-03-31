@@ -15,4 +15,9 @@ contract HashRecord {
    function getFuzzyHashes(uint256 ipnsHash) public view returns (string[] memory) {
       return fuzzyHashes[ipnsHash];
    }
+
+   // Delete hashes stored on particular IPNS hash
+   function deleteHashes(uint256 ipnsHash) public {
+      delete fuzzyHashes[ipnsHash];
+   }
 }

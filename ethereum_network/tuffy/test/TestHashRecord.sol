@@ -24,4 +24,10 @@ contract TestHashRecord {
    	Assert.equal(correctFuzzyHashes[0], storedFuzzyHashes[0], "Stored fuzzy hash 1 should match the random one");
    	Assert.equal(correctFuzzyHashes[1], storedFuzzyHashes[1], "Stored fuzzy hash 2 should match the random second one");
    }
+
+   function deleteFuzzyHash() public {
+	hashRecord.deleteHashes(ipnsHash);
+   	string[] memory storedFuzzyHashes = hashRecord.getFuzzyHashes(ipnsHash);
+	Assert.isEmpty(storedFuzzyHashes[0], "All the hashes for this IPNS hash should be deleted");
+   }
 }

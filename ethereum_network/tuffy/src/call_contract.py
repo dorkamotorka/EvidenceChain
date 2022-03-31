@@ -1,14 +1,23 @@
+'''
+- Script currently only works for one particular evidence (and its modifications)
+
+- Each new hash of the changed evidence is chained by prefixing it with previous fuzzy hash 
+
+- Not only does this enable us to chronologically order the changes of the evidence but also 
+extract fuzzy hashes belonging to one evidence since the chained hashes preserve similarity
+
+Potential upgrade: add encryption to the file, before storing it on IPFS (Consequence: We then need to store ecrpytion/decryption key)
+'''
+
 import os
 import sys
 import json
 from web3 import Web3, HTTPProvider
 import ssdeep
 import ipfsApi as ipfsapi
+import requests
 
-# TODO:
-# - add IPNS
-# - combined hash logic here, only send a hash to smart contract
-# - possible encryption of files before sending to ipfs
+IPNS_HASH = 'k51qzi5uqu5dhxi8noq3759heuc3a4vvhs8bgmgvywy77j6ewm88aqbvo54b3f'
 
 try:
     ipfs = ipfsapi.Client('127.0.0.1', 5001)
@@ -41,19 +50,39 @@ contract = web3.eth.contract(address=deployed_contract_address, abi=contract_abi
 
 # Calculate fuzzy hash of data
 fuzzy_hash = ssdeep.hash_from_file('evidence.txt')
-print(fuzzy_hash)
+print('Fuzzy hash of the file:', fuzzy_hash)
+
+with open('last_hash.txt', 'r') as f:
+    last_hash = f.read()
+    print('Last hash:', last_hash)
+    if last_hash != '':
+        print('Chaining hash before push to Ethereum network...')
+        fuzzy_hash = ssdeep.hash(fuzzy_hash + last_hash)
+        print('Chained fuzzy hash:', fuzzy_hash)
+
+with open('last_hash.txt', 'w') as f:
+    f.write(fuzzy_hash)
 
 # Add data to IPFS
 ipfs_hash = ipfs.add('evidence.txt')['Hash']
+
+# No support from python library - therefore we call bash commands
+# Adds IPFS hash to IPNS
+print('Adding IPFS hash to IPNS. This might take a minute...')
+os.system('ipfs name publish /ipfs/' + ipfs_hash)
+
 data_on_ipfs = os.popen("ipfs cat " + ipfs_hash).read()
-print(data_on_ipfs)
+#print('Data on IPFS:', data_on_ipfs)
+data_on_ipns = requests.get('https://gateway.ipfs.io/ipns/' + IPNS_HASH).text
+#print('Data on IPNS:', data_on_ipns)
+# Sanity check
+assert data_on_ipfs == data_on_ipns
 
-# Store and Retrieve fuzzy hash from Smart Contract
-tx_hash = contract.functions.setFuzzyHash(fuzzy_hash, ipfs_hash).transact()
+# Store hash according to IPNS hash
+tx_hash = contract.functions.setFuzzyHash(fuzzy_hash, IPNS_HASH).transact()
 tx_receipt = web3.eth.wait_for_transaction_receipt(tx_hash)
-ret = contract.functions.getFuzzyHash(ipfs_hash).call()
-
-assert ret == fuzzy_hash
+ret = contract.functions.getFuzzyHash(IPNS_HASH).call()
+print(ret)
+#assert ret == fuzzy_hash
 
 print('Succesfully stored and retreived a new fuzzy hash!')
-
