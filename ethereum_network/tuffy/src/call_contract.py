@@ -5,6 +5,11 @@ from web3 import Web3, HTTPProvider
 import ssdeep
 import ipfsApi as ipfsapi
 
+# TODO:
+# - add IPNS
+# - combined hash logic here, only send a hash to smart contract
+# - possible encryption of files before sending to ipfs
+
 try:
     ipfs = ipfsapi.Client('127.0.0.1', 5001)
 except:
