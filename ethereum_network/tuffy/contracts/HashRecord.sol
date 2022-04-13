@@ -6,6 +6,8 @@ contract HashRecord {
    // Fuzzy hashes: string[]
    mapping(string => string[]) public fuzzyHashes;
 
+   // Add modifier for access restriction
+
    // Store fuzzy hash mapped to IPNS hash
    function setFuzzyHash(string memory fuzzyHash, string memory ipnsHash) public {
       fuzzyHashes[ipnsHash].push(fuzzyHash);
