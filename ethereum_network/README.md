@@ -17,6 +17,14 @@ To deploy private Ethereum network using geth, have a look at launch_network.txt
 
 ## Contract deployment
 
+Run:
+
+	truffle deploy --reset
+
+Manual for the truffle commands: https://trufflesuite.com/docs/truffle/reference/truffle-commands/
+
+Output:
+
    1_initial_migration.js
    ======================
 
@@ -66,3 +74,39 @@ To deploy private Ethereum network using geth, have a look at launch_network.txt
    =======
    > Total deployments:   2
    > Final cost:          0.001008479 ETH
+
+
+## Interact with contract
+
+In order to be able to use the contract, you need to find its address. 
+Move to tuffy record and run bind to ethereum network:
+
+	cd ethereum_network/tuffy
+	truffle console
+
+Inside truffle console find contracts name and its address:
+
+	truffle(development)> HashRecord.address
+
+Write the output of this command to **tuffy/src/call_contract.py** file (I left a comment there).
+
+Then you run this demo file call_contract.py by:
+
+	pipenv run python call_contract.py
+
+This file:
+a) connect to the IPFS and Ethereum Network
+b) stores evidence on IPFS network and saves the returned hash
+c) Stores the hash onto a Smart Contract
+d) Retreives the stores hash from the Smart Contract
+
+Expected output:
+
+   Contract functions:  [<Function fuzzyHashes(string,uint256)>, <Function setFuzzyHash(string,string)>, <Function getFuzzyHashes(string)>, <Function deleteHashes(string)>]
+   Fuzzy hash of the file: 3:kEIT/fMv:kEIT/m
+   Last hash: 3:YOi0TXwSVcgLAl:YOogcl
+   Chained fuzzy hash: 3:YOi0TXwSUDkh4J:YOK4qJ
+   ['3:YOi0TXwSW9D81n:YOIm1n', '3:YOi0TXwSVcgLAl:YOogcl', '3:YOi0TXwSUDkh4J:YOK4qJ']
+   Succesfully stored and retreived a new fuzzy hash!
+
+I also print available function on the contract, to make it easier for you to change the code and make calls to it.

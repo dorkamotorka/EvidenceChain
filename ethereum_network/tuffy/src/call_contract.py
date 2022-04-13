@@ -39,15 +39,16 @@ web3.eth.defaultAccount = web3.eth.accounts[1]
 compiled_contract_path = '../build/contracts/HashRecord.json'
 
 # Deployed contract address (see `migrate` command output: `contract address`)
-deployed_contract_address = '0x3a34a5DC0f54aA960a4C9dEF9745bf41DDd6A19f'
+# NOTE: You have to change this address, since your contract address will be different
+deployed_contract_address = '0xbc3470D3535c0B01dcdF06110Fa3501A404805eA'
 
 with open(compiled_contract_path) as file:
     contract_json = json.load(file)  # load contract info as JSON
     contract_abi = contract_json['abi']  # fetch contract's abi - necessary to call its functions
-    print(contract_abi)
 
 # Fetch deployed contract reference
 contract = web3.eth.contract(address=deployed_contract_address, abi=contract_abi)
+print("Contract functions: ", contract.all_functions())
 
 # Calculate fuzzy hash of data
 fuzzy_hash = ssdeep.hash_from_file('evidence.txt')
