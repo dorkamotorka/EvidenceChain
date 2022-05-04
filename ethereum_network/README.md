@@ -35,20 +35,20 @@ pipenv run python call_contract.py
 ```
 
 This file:
-a) connects to the IPFS and Ethereum Network
-b) stores evidence on IPFS network and saves the returned hash
-c) Stores the hash onto a Smart Contract
-d) Retreives the stored hash from the Smart Contract
-e) Optionally deletes all the hashes
+- Connects to the IPFS and Ethereum Network
+- Stores evidence on IPFS network and saves the returned hash
+- Stores the hash onto a Smart Contract
+- Retreives the stored hash from the Smart Contract
+- Optionally deletes all the hashes
 
 Expected/example output:
 
-   Contract functions:  [<Function fuzzyHashes(string,uint256)>, <Function setFuzzyHash(string,string)>, <Function getFuzzyHashes(string)>, <Function deleteHashes(string)>]
-   Fuzzy hash of the file: 3:kEIT/fMv:kEIT/m
-   Last hash: 3:YOi0TXwSVcgLAl:YOogcl
-   Chained fuzzy hash: 3:YOi0TXwSUDkh4J:YOK4qJ
-   ['3:YOi0TXwSW9D81n:YOIm1n', '3:YOi0TXwSVcgLAl:YOogcl', '3:YOi0TXwSUDkh4J:YOK4qJ']
-   Succesfully stored and retreived a new fuzzy hash!
+      Contract functions:  [<Function fuzzyHashes(string,uint256)>, <Function setFuzzyHash(string,string)>, <Function getFuzzyHashes(string)>, <Function deleteHashes(string)>]
+      Fuzzy hash of the file: 3:kEIT/fMv:kEIT/m
+      Last hash: 3:YOi0TXwSVcgLAl:YOogcl
+      Chained fuzzy hash: 3:YOi0TXwSUDkh4J:YOK4qJ
+      ['3:YOi0TXwSW9D81n:YOIm1n', '3:YOi0TXwSVcgLAl:YOogcl', '3:YOi0TXwSUDkh4J:YOK4qJ']
+      Succesfully stored and retreived a new fuzzy hash!
 
 I also print available function on the contract, to make it easier for you to change the code and make calls to it.
 
@@ -62,7 +62,7 @@ truffle deploy --reset
 
 Manual for the truffle commands: https://trufflesuite.com/docs/truffle/reference/truffle-commands/
 
-Example output:
+Expected/example output:
 
    1_initial_migration.js
    ======================
@@ -109,10 +109,10 @@ Example output:
       -------------------------------------
       > Total cost:         0.000717897 ETH
 
-   Summary
-   =======
-   > Total deployments:   2
-   > Final cost:          0.001008479 ETH
+      Summary
+      =======
+      > Total deployments:   2
+      > Final cost:          0.001008479 ETH
    
 This process will change the HashRecord's address, which you can obtain within `truffle console` in the same manner described above.
 
