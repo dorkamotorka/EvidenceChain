@@ -63,7 +63,7 @@ truffle deploy --reset
 Manual for the truffle commands: https://trufflesuite.com/docs/truffle/reference/truffle-commands/
 
 Expected/example output:
-
+```
    1_initial_migration.js
    ======================
 
@@ -113,6 +113,6 @@ Expected/example output:
       =======
       > Total deployments:   2
       > Final cost:          0.001008479 ETH
-   
+```
 This process will change the HashRecord's address, which you can obtain within `truffle console` in the same manner described above.
 
