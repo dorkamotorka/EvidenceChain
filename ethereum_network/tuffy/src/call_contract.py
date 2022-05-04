@@ -30,17 +30,19 @@ blockchain_address = 'http://127.0.0.1:8545'
 
 # Client instance to interact with the blockchain
 web3 = Web3(HTTPProvider(blockchain_address))
-#print(web3.isConnected())
 
 # Set the default account (so we don't need to set the "from" for every transaction call)
-web3.eth.defaultAccount = web3.eth.accounts[1]
+# This should be the same account address as the one unlocked during the initialization
+# of the miner in ethereum_network/launch_network.txt
+web3.eth.defaultAccount = web3.eth.accounts[0]
 
 # Path to the compiled contract JSON file
 compiled_contract_path = '../build/contracts/HashRecord.json'
 
 # Deployed contract address (see `migrate` command output: `contract address`)
 # NOTE: You have to change this address, since your contract address will be different
-deployed_contract_address = '0xbc3470D3535c0B01dcdF06110Fa3501A404805eA'
+# deployed_contract_address = '0xbc3470D3535c0B01dcdF06110Fa3501A404805eA'
+deployed_contract_address = '0x3312D8B47801037f12E7103a0A867Fb168c77388'
 
 with open(compiled_contract_path) as file:
     contract_json = json.load(file)  # load contract info as JSON
@@ -51,7 +53,8 @@ contract = web3.eth.contract(address=deployed_contract_address, abi=contract_abi
 print("Contract functions: ", contract.all_functions())
 
 # Calculate fuzzy hash of data
-fuzzy_hash = ssdeep.hash_from_file('evidence.txt')
+file_to_hash = input('Input evidence name\n')
+fuzzy_hash = ssdeep.hash_from_file(file_to_hash)
 print('Fuzzy hash of the file:', fuzzy_hash)
 
 with open('last_hash.txt', 'r') as f:
@@ -66,7 +69,7 @@ with open('last_hash.txt', 'w') as f:
     f.write(fuzzy_hash)
 
 # Add data to IPFS
-ipfs_hash = ipfs.add('evidence.txt')['Hash']
+ipfs_hash = ipfs.add(file_to_hash)['Hash']
 
 # No support from python library - therefore we call bash commands
 # Adds IPFS hash to IPNS
@@ -92,7 +95,7 @@ ret = contract.functions.getFuzzyHashes(IPNS_HASH).call()
 print(ret)
 
 # Delete all hashes according to IPNS hash
-#tx_hash = contract.functions.deleteHashes(IPNS_HASH).transact()
-#tx_receipt = web3.eth.waitForTransactionReceipt(tx_hash)
+# tx_hash = contract.functions.deleteHashes(IPNS_HASH).transact()
+# tx_receipt = web3.eth.waitForTransactionReceipt(tx_hash)
 
 print('Succesfully stored and retreived a new fuzzy hash!')
