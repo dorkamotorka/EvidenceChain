@@ -1,0 +1,29 @@
+version: "3.9"
+services:
+   db:
+      image: "postgres:14"
+      ports: 
+      - "5432:5432"
+      environment:
+      - POSTGRES_USER=${PGUSER}
+      - POSTGRES_DB=${PGDATABASE}
+      - POSTGRES_PASSWORD=${PGPASSWORD}
+      networks:
+         node_net:
+            ipv4_address: 172.34.1.2
+   app:
+      image: tp7220/storage
+      ports: 
+      - "5000:5000"
+      depends_on:
+      - db
+      networks:
+         node_net:
+            ipv4_address: 172.34.1.3
+
+networks:
+  node_net:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.34.0.0/16
