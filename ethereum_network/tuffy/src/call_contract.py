@@ -39,8 +39,8 @@ web3.eth.defaultAccount = web3.eth.accounts[1]
 compiled_contract_path = '../build/contracts/HashRecord.json'
 
 # Deployed contract address (see `migrate` command output: `contract address`)
-# NOTE: You have to change this address, since your contract address will be different
-deployed_contract_address = '0xbc3470D3535c0B01dcdF06110Fa3501A404805eA'
+# NOTE: You have to change this address, since your contract address will be different on each deployment
+deployed_contract_address = '0xe4c0329947178456791F04261af11E9f4369F461'
 
 with open(compiled_contract_path) as file:
     contract_json = json.load(file)  # load contract info as JSON
