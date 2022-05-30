@@ -1,5 +1,7 @@
 # BOOTNODE_IP=127.0.0.1
 
+# Note - commands may need to be run as `sudo`
+
 ###########################################
 ### Clean current network configuration ###
 ###########################################
