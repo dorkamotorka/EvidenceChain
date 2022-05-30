@@ -53,12 +53,14 @@ This file:
 
 Expected/example output:
 
-      Contract functions:  [<Function fuzzyHashes(string,uint256)>, <Function setFuzzyHash(string,string)>, <Function getFuzzyHashes(string)>, <Function deleteHashes(string)>]
-      Fuzzy hash of the file: 3:kEIT/fMv:kEIT/m
-      Last hash: 3:YOi0TXwSVcgLAl:YOogcl
-      Chained fuzzy hash: 3:YOi0TXwSUDkh4J:YOK4qJ
-      ['3:YOi0TXwSW9D81n:YOIm1n', '3:YOi0TXwSVcgLAl:YOogcl', '3:YOi0TXwSUDkh4J:YOK4qJ']
-      Succesfully stored and retreived a new fuzzy hash!
+```
+Contract functions:  [<Function fuzzyHashes(string,uint256)>, <Function setFuzzyHash(string,string)>, <Function getFuzzyHashes(string)>, <Function deleteHashes(string)>]
+Fuzzy hash of the file: 3:kEIT/fMv:kEIT/m
+Last hash: 3:YOi0TXwSVcgLAl:YOogcl
+Chained fuzzy hash: 3:YOi0TXwSUDkh4J:YOK4qJ
+['3:YOi0TXwSW9D81n:YOIm1n', '3:YOi0TXwSVcgLAl:YOogcl', '3:YOi0TXwSUDkh4J:YOK4qJ']
+Succesfully stored and retreived a new fuzzy hash!
+```
 
 I also print available function on the contract, to make it easier for you to change the code and make calls to it.
 

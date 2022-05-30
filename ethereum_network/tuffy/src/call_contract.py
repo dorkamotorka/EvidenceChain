@@ -49,20 +49,23 @@ with open(compiled_contract_path) as file:
 
 # Fetch deployed contract reference
 contract = web3.eth.contract(address=deployed_contract_address, abi=contract_abi)
-print("Contract functions: ", contract.all_functions())
+# print("Contract functions: ", contract.all_functions())
 
 # Calculate fuzzy hash of data
 file_to_hash = input('Input evidence name\n')
 fuzzy_hash = ssdeep.hash_from_file(file_to_hash)
-print('Fuzzy hash of the file:', fuzzy_hash)
+print('\nFuzzy hash of the file:', fuzzy_hash)
+print()
 
 with open('last_hash.txt', 'r') as f:
     last_hash = f.read()
     print('Last hash:', last_hash)
+    print()
     if last_hash != '':
         #print('Chaining hash before push to Ethereum network...')
         fuzzy_hash = ssdeep.hash(fuzzy_hash + last_hash)
         print('Chained fuzzy hash:', fuzzy_hash)
+        print()
 
 with open('last_hash.txt', 'w') as f:
     f.write(fuzzy_hash)
@@ -92,9 +95,13 @@ tx_receipt = web3.eth.waitForTransactionReceipt(tx_hash)
 # Retreive stored hashes according to IPNS hash
 ret = contract.functions.getFuzzyHashes(IPNS_HASH).call()
 print(ret)
+print()
 
 # Delete all hashes according to IPNS hash
 # tx_hash = contract.functions.deleteHashes(IPNS_HASH).transact()
 # tx_receipt = web3.eth.waitForTransactionReceipt(tx_hash)
+# print("Successfully deleted all evidence for this IPNS hash")
+# print()
 
-print('Succesfully stored and retreived a new fuzzy hash!')
+print('All operations successful!')
+print()
