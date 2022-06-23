@@ -1,5 +1,8 @@
 # EvidenceChain
 
+A recently proposed way to achieve better IoT security and zero-trust architecture using blockchain technology includes an immutable ledger, a decentralized peer-to-peer network and a well-established low-level cryptographic algorithm. 
+This project aims to utilize and implement those features, for the sake of proof-of-concept. 
+
 # Dependencies
 
 Project uses the following tools (I believe that's all)
@@ -11,4 +14,4 @@ Project uses the following tools (I believe that's all)
 
 # How to run
 
-Look at the `README.md` in `ethereum_network/`.
+Look at the `how_to_launch_network.txt` in `ethereum_network/`.
